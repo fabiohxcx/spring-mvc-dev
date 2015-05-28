@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.Conta;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,4 +50,19 @@ public class ContaController {
 
 		return mv;
 	}
+
+	@RequestMapping("/mostraConta")
+	public String mostra(Long id, Model model) {
+		ContaDAO dao = new ContaDAO();
+		model.addAttribute("conta", dao.buscaPorId(id));
+		return "conta/mostra";
+	}
+
+	@RequestMapping("/alteraConta")
+	public String altera(Conta conta) {
+		ContaDAO dao = new ContaDAO();
+		dao.altera(conta);
+		return "redirect:listaContas";
+	}
+
 }
