@@ -28,6 +28,16 @@ public class ContaController {
 		return "conta-adicionada";
 	}
 
+	@RequestMapping("/removeConta")
+	public String remove(Conta conta) {
+
+		ContaDAO dao = new ContaDAO();
+		dao.remove(conta);
+
+		return "redirect:listaContas"; // fica com a url listaContas
+		// return "forward:listaContas"; mantém a url do remove
+	}
+
 	@RequestMapping("/listaContas")
 	public ModelAndView lista() {
 
