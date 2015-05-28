@@ -1,9 +1,12 @@
 package controller;
 
+import java.util.List;
+
 import modelo.Conta;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import dao.ContaDAO;
 
@@ -23,5 +26,17 @@ public class ContaController {
 		dao.adiciona(conta);
 
 		return "conta-adicionada";
+	}
+
+	@RequestMapping("/listaContas")
+	public ModelAndView lista() {
+
+		ContaDAO dao = new ContaDAO();
+		List<Conta> contas = dao.lista();
+
+		ModelAndView mv = new ModelAndView("conta/lista");
+		mv.addObject("todasAsContas", contas);
+
+		return mv;
 	}
 }
